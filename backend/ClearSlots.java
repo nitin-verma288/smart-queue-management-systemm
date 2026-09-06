@@ -5,7 +5,8 @@ import java.sql.Statement;
 public class ClearSlots {
     public static void main(String[] args) {
         try {
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/queue_db", "root", "@nitinv288#");
+            String dbPassword = System.getenv("SPRING_DATASOURCE_PASSWORD") != null ? System.getenv("SPRING_DATASOURCE_PASSWORD") : "";
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/queue_db", "root", dbPassword);
             Statement stmt = conn.createStatement();
             stmt.executeUpdate("TRUNCATE TABLE tokens");
             stmt.executeUpdate("TRUNCATE TABLE slot");
